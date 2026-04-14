@@ -1,9 +1,11 @@
 import Hero from '../components/Hero'
 import Stats from '../components/Stats'
-import About from '../components/About'
+import HowItWorks from '../components/Services'
 import Features from '../components/Features'
-import Services from '../components/Services'
-import Projects from '../components/Projects'
+import TrainingExperience from '../components/TrainingExperience'
+import VideoSection from '../components/VideoSection'
+import Industries from '../components/About'
+import GlobalTrust from '../components/Projects'
 import Blog from '../components/Blog'
 import CTA from '../components/CTA'
 
@@ -12,10 +14,12 @@ const Home = () => {
     <main>
       <Hero />
       <Stats />
-      <About />
+      <HowItWorks />
       <Features />
-      <Services />
-      <Projects />
+      <TrainingExperience />
+      <VideoSection />
+      <Industries />
+      <GlobalTrust />
       <Blog />
       <CTA />
     </main>

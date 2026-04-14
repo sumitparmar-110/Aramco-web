@@ -4,22 +4,17 @@ import { useEffect, useRef } from 'react'
 const Counter = ({ value, duration = 2, suffix = '' }) => {
   const ref = useRef(null)
   const motionValue = useMotionValue(0)
-  const springValue = useSpring(motionValue, {
-    damping: 30,
-    stiffness: 100,
-  })
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const springValue = useSpring(motionValue, { damping: 30, stiffness: 100 })
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   useEffect(() => {
-    if (isInView) {
-      motionValue.set(value)
-    }
+    if (isInView) motionValue.set(value)
   }, [isInView, value, motionValue])
 
   useEffect(() => {
-    springValue.on("change", (latest) => {
+    springValue.on('change', (latest) => {
       if (ref.current) {
-        ref.current.textContent = Intl.NumberFormat("en-US").format(latest.toFixed(0)) + suffix
+        ref.current.textContent = Intl.NumberFormat('en-US').format(latest.toFixed(0)) + suffix
       }
     })
   }, [springValue, suffix])
@@ -29,105 +24,104 @@ const Counter = ({ value, duration = 2, suffix = '' }) => {
 
 const Stats = () => {
   const stats = [
-    { 
-      num: 85, 
-      suffix: '%', 
-      label: 'Improved Confidence', 
-      sub: 'Participants reported clarity through AI simulations.',
-      icon: 'fa-user-shield',
-      color: '#108a00'
+    {
+      num: 85, suffix: '%',
+      label: 'Confidence Boost',
+      sub: 'After AI-powered practice sessions',
+      icon: 'fa-shield-halved',
+      gradient: 'linear-gradient(135deg, #108a00, #22c55e)'
     },
-    { 
-      num: 70, 
-      suffix: '%', 
-      label: 'Reduced Defensiveness', 
-      sub: 'Measured behavioral shift in professional feedback.',
+    {
+      num: 70, suffix: '%',
+      label: 'Reduced Defensive Reactions',
+      sub: 'Measured behavioral improvement',
       icon: 'fa-chart-line',
-      color: '#002e00'
+      gradient: 'linear-gradient(135deg, #0d6e00, #108a00)'
     },
-    { 
-      num: 3, 
-      suffix: 'X', 
-      label: 'Higher Engagement', 
-      sub: 'Increased interaction during complex training modules.',
+    {
+      num: 3, suffix: 'X',
+      label: 'Higher Engagement',
+      sub: 'Compared to traditional training',
       icon: 'fa-bolt',
-      color: '#108a00'
+      gradient: 'linear-gradient(135deg, #22c55e, #16a34a)'
     }
   ]
 
   return (
-    <section className="stats" style={{ padding: '100px 0', background: 'var(--bg)', position: 'relative', overflow: 'hidden' }}>
-      {/* Decorative Background Element */}
-      <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent, var(--border), transparent)' }}></div>
-
-      <div className="container" style={{ maxWidth: '1000px' }}> {/* Reduced container width */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}> {/* Adjusted gap */}
+    <section style={{ padding: '100px 0', background: 'var(--bg)', position: 'relative' }}>
+      <div className="container" style={{ maxWidth: '1000px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
           {stats.map((s, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              whileHover={{ 
-                y: -10, 
-                boxShadow: '0 20px 40px rgba(16, 138, 0, 0.15)', // Enhanced shadow on hover
-                borderColor: 'rgba(16, 138, 0, 0.2)'
-              }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              whileHover={{ y: -8, boxShadow: '0 24px 50px rgba(16, 138, 0, 0.15)' }}
               style={{
-                background: 'white',
-                padding: '40px 30px',
-                borderRadius: '24px',
-                boxShadow: '0 10px 30px rgba(16, 138, 0, 0.08)', // Light green shadow
-                border: '1px solid rgba(16, 138, 0, 0.1)', // Subtle green border
+                background: 'var(--white)',
+                padding: '36px 28px',
+                borderRadius: 'var(--radius-lg)',
+                boxShadow: 'var(--shadow-sm)',
+                border: '1px solid var(--border)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '20px',
                 position: 'relative',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                overflow: 'hidden'
               }}
             >
-              {/* Card Header: Icon & Visual Detail */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                <div style={{ 
-                  width: '50px', 
-                  height: '50px', 
-                  borderRadius: '12px', 
-                  background: 'rgba(16, 138, 0, 0.05)', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  color: 'var(--primary)',
-                  fontSize: '1.2rem'
-                }}>
-                  <i className={`fas ${s.icon}`}></i>
-                </div>
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.color, opacity: 0.4 }}></div>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '14px',
+                background: s.gradient,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: '1.1rem',
+                boxShadow: '0 8px 20px rgba(16, 138, 0, 0.25)'
+              }}>
+                <i className={`fas ${s.icon}`}></i>
               </div>
 
-              {/* Metric Content */}
               <div>
-                <h3 style={{ fontSize: '3.8rem', fontWeight: 900, color: 'var(--dark)', lineHeight: 1, margin: '0 0 8px 0', fontFamily: 'var(--font-heading)' }}>
+                <h3 style={{
+                  fontSize: '3.2rem',
+                  fontWeight: 800,
+                  color: 'var(--text)',
+                  lineHeight: 1,
+                  margin: '0 0 8px 0',
+                  letterSpacing: '-0.03em'
+                }}>
                   <Counter value={s.num} suffix={s.suffix} />
                 </h3>
-                <h4 style={{ fontSize: '1.1rem', color: 'var(--dark)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 12px 0' }}>
+                <h4 style={{
+                  fontSize: '1rem',
+                  color: 'var(--text)',
+                  fontWeight: 700,
+                  margin: '0 0 8px 0',
+                  letterSpacing: '-0.01em'
+                }}>
                   {s.label}
                 </h4>
-                <p style={{ margin: 0, color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
                   {s.sub}
                 </p>
               </div>
 
-              {/* Visual "Growth" Border Bottom */}
-              <div style={{ 
-                position: 'absolute', 
-                bottom: 0, 
-                left: '30px', 
-                right: '30px', 
-                height: '3px', 
-                borderRadius: '2px 2px 0 0', 
-                background: `linear-gradient(90deg, ${s.color}, rgba(16, 138, 0, 0.15))` 
-              }}></div>
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: '28px',
+                right: '28px',
+                height: '3px',
+                borderRadius: '2px 2px 0 0',
+                background: s.gradient
+              }} />
             </motion.div>
           ))}
         </div>

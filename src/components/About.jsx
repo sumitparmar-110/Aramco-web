@@ -1,58 +1,83 @@
-const About = () => {
+import { motion } from 'framer-motion'
+
+const industries = [
+  { icon: 'fa-industry', label: 'Manufacturing', color: '#108a00' },
+  { icon: 'fa-helmet-safety', label: 'Construction', color: '#22c55e' },
+  { icon: 'fa-oil-well', label: 'Oil & Gas', color: '#0d6e00' },
+  { icon: 'fa-gears', label: 'Operations Teams', color: '#16a34a' }
+]
+
+const Industries = () => {
   return (
-    <section id="about" style={{ background: 'var(--primary)', padding: '100px 0', color: 'white' }}>
+    <section style={{ background: 'var(--bg)', padding: '120px 0' }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '80px', alignItems: 'center' }}>
-          <div style={{ position: 'relative' }}>
-             <img 
-               src="/img/oil_refinery_pipes.png" 
-               alt="Industrial" 
-               style={{ width: '100%', borderRadius: '12px', boxShadow: '0 30px 60px rgba(0,0,0,0.3)' }}
-             />
-             <div style={{ 
-               position: 'absolute', 
-               bottom: '-20px', 
-               right: '-20px', 
-               background: 'var(--white-pure)', 
-               padding: '30px',
-               borderRadius: '12px',
-               textAlign: 'center',
-               boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
-               color: 'var(--dark)'
-             }}>
-                <strong style={{ fontSize: '3.5rem', display: 'block', lineHeight: 1, fontWeight: 900 }}>25</strong>
-                <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', fontWeight: 800, color: 'var(--muted)' }}>Years of <br/> Excellence</span>
-             </div>
-          </div>
-          
-          <div>
-            <p style={{ color: 'rgba(255,255,255,0.7)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '15px' }}>TRUSTED PARTNER</p>
-            <h2 style={{ fontSize: '3rem', fontWeight: 900, lineHeight: 1.2, marginBottom: '30px', color: 'white' }}>
-               Trusted Global Partner For Manufacturing & Industries
-            </h2>
-            <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.9)', marginBottom: '40px', lineHeight: 1.7 }}>
-               Every training module is optimized for high-performance industrial environments where precision and behavior are the bedrock of safety and success.
-            </p>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '40px' }}>
-               <div style={{ background: 'rgba(255,255,255,0.1)', padding: '25px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <i className="fas fa-check-circle" style={{ fontSize: '1.5rem', marginBottom: '15px' }}></i>
-                  <h4 style={{ margin: 0, fontWeight: 800 }}>Risk Management</h4>
-                  <p style={{ marginTop: '10px', fontSize: '0.9rem', opacity: 0.8 }}>Reducing defensive triggers and improving safety compliance.</p>
-               </div>
-               <div style={{ background: 'rgba(255,255,255,0.1)', padding: '25px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <i className="fas fa-microchip" style={{ fontSize: '1.5rem', marginBottom: '15px' }}></i>
-                  <h4 style={{ margin: 0, fontWeight: 800 }}>AI Integration</h4>
-                  <p style={{ marginTop: '10px', fontSize: '0.9rem', opacity: 0.8 }}>Personalized growth metrics for every participant.</p>
-               </div>
-            </div>
-            
-            <a href="#" className="btn btn-primary-inverse" style={{ padding: '18px 45px' }}>READ MORE</a>
-          </div>
+        <div style={{ textAlign: 'center', marginBottom: '70px' }}>
+          <span className="section-label">
+            <i className="fas fa-building"></i> Industries
+          </span>
+          <h2 className="section-title" style={{ maxWidth: '500px', margin: '0 auto 16px' }}>
+            Built for Industrial Teams
+          </h2>
+          <p className="section-subtitle" style={{ margin: '0 auto' }}>
+            Tailored AI training for high-stakes environments
+          </p>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '20px',
+          maxWidth: '960px',
+          margin: '0 auto'
+        }}>
+          {industries.map((ind, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              whileHover={{ y: -8, boxShadow: '0 20px 50px rgba(16, 138, 0, 0.12)' }}
+              style={{
+                background: 'var(--white)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '40px 28px',
+                textAlign: 'center',
+                border: '1px solid var(--border)',
+                boxShadow: 'var(--shadow-sm)',
+                cursor: 'default',
+                transition: 'all 0.35s ease'
+              }}
+            >
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '18px',
+                background: `${ind.color}18`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 20px',
+                color: ind.color,
+                fontSize: '1.5rem'
+              }}>
+                <i className={`fas ${ind.icon}`}></i>
+              </div>
+              <h3 style={{
+                fontSize: '1.05rem',
+                fontWeight: 700,
+                color: 'var(--text)',
+                margin: 0,
+                letterSpacing: '-0.01em'
+              }}>
+                {ind.label}
+              </h3>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   )
 }
 
-export default About
+export default Industries

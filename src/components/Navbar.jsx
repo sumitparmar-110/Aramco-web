@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="container topbar-inner">
         <Link to="/" className="brand" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <img src="/img/logo.png" alt="Aramco Logo" style={{ height: '35px' }} />
-          <span style={{ color: scrolled ? 'var(--text)' : 'white' }}>Aramco</span>
+          <span style={{ color: scrolled ? 'var(--text)' : 'white' }}>Aramco<span className="brand-dot">.</span></span>
         </Link>
 
         <button
@@ -31,26 +31,20 @@ const Navbar = () => {
         </button>
 
         <nav className={`nav ${isOpen ? 'open' : ''}`}>
-          {['Home', 'Methodology', 'Industries', 'Articles'].map((item) => {
-            const id = item.toLowerCase()
+          {['Platform', 'Features', 'How it Works', 'Insights'].map((item) => {
+            const id = item.toLowerCase().replace(/\s+/g, '-')
             const linkPath = location.pathname === '/' ? `#${id}` : `/#${id}`
-
             return (
-              <a
-                key={item}
-                href={linkPath}
-                onClick={() => setIsOpen(false)}
-              >
+              <a key={item} href={linkPath} onClick={() => setIsOpen(false)}>
                 {item}
               </a>
             )
           })}
-          <a
-            href="https://lmsathena.com/login"
-            className="btn btn-primary"
-            onClick={() => setIsOpen(false)}
-          >
-            Login
+          <a href="#" className="btn btn-ghost" onClick={() => setIsOpen(false)} style={{ padding: '10px 20px' }}>
+            Book Demo
+          </a>
+          <a href="https://lmsathena.com/login" className="btn btn-primary" onClick={() => setIsOpen(false)} style={{ padding: '10px 20px' }}>
+            Start Training
           </a>
         </nav>
       </div>
